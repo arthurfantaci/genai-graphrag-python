@@ -1,0 +1,40 @@
+{
+  "recommendations": [
+    // Python Core
+    "ms-python.python",
+    "ms-python.debugpy",
+    "ms-python.vscode-pylance",
+
+    // Ruff - Linting & Formatting
+    "charliermarsh.ruff",
+
+    // Neo4j
+    "neo4j-extensions.neo4j-for-vscode",
+
+    // Environment & Config
+    "mikestead.dotenv",
+    "tamasfe.even-better-toml",
+
+    // Git
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+
+    // Markdown & Documentation
+    "yzhang.markdown-all-in-one",
+    "bierner.markdown-mermaid",
+
+    // AI Assistance
+    "anthropic.claude-code",
+
+    // Productivity
+    "usernamehw.errorlens",
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "unwantedRecommendations": [
+    // Disabled - Ruff replaces these
+    "ms-python.black-formatter",
+    "ms-python.isort",
+    "ms-python.flake8",
+    "ms-python.pylint"
+  ]
+}

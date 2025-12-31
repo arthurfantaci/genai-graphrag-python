@@ -1,0 +1,87 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "Test Environment",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/genai-graphrag-python/test_environment.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": true
+    },
+    {
+      "name": "KG Builder (Basic)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/genai-graphrag-python/kg_builder.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    {
+      "name": "KG Builder (Schema)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/genai-graphrag-python/kg_builder_schema.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    {
+      "name": "KG Structured Builder",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/genai-graphrag-python/kg_structured_builder.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    {
+      "name": "Text2Cypher RAG",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/genai-graphrag-python/text2cypher_rag.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    {
+      "name": "Vector Cypher RAG",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/genai-graphrag-python/vector_cypher_rag.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    {
+      "name": "Extract Schema",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/genai-graphrag-python/extract_schema.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Pipeline: Build + Query",
+      "configurations": ["KG Builder (Basic)", "Vector Cypher RAG"],
+      "stopAll": true
+    }
+  ]
+}

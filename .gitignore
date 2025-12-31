@@ -1,4 +1,8 @@
-.vscode
+# VS Code - allow shared settings, ignore personal state
+.vscode/*.log
+.vscode/.ropeproject
+.vscode/settings.local.json
+
 .env
 .venv
 
