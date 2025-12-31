@@ -24,11 +24,7 @@
     "bierner.markdown-mermaid",
 
     // AI Assistance
-    "anthropic.claude-code",
-
-    // Productivity
-    "usernamehw.errorlens",
-    "streetsidesoftware.code-spell-checker"
+    "usernamehw.errorlens"
   ],
   "unwantedRecommendations": [
     // Disabled - Ruff replaces these
