@@ -1,16 +1,14 @@
-import os
 from dotenv import load_dotenv
+
 load_dotenv()
+
+import asyncio
 
 from neo4j_graphrag.experimental.components.schema import SchemaFromTextExtractor
 from neo4j_graphrag.llm import OpenAILLM
-import asyncio
 
 schema_extractor = SchemaFromTextExtractor(
-    llm=OpenAILLM(
-        model_name="gpt-4",
-        model_params={"temperature": 0}
-    )
+    llm=OpenAILLM(model_name="gpt-4", model_params={"temperature": 0})
 )
 
 text = """

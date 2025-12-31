@@ -1,18 +1,22 @@
 import os
+
 from dotenv import load_dotenv
+
 load_dotenv()
 
 import asyncio
 
 from neo4j import GraphDatabase
-from neo4j_graphrag.llm import OpenAILLM
 from neo4j_graphrag.embeddings import OpenAIEmbeddings
+from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter import (
+    FixedSizeSplitter,
+)
 from neo4j_graphrag.experimental.pipeline.kg_builder import SimpleKGPipeline
-from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter import FixedSizeSplitter
+from neo4j_graphrag.llm import OpenAILLM
 
 neo4j_driver = GraphDatabase.driver(
     os.getenv("NEO4J_URI"),
-    auth=(os.getenv("NEO4J_USERNAME"), os.getenv("NEO4J_PASSWORD"))
+    auth=(os.getenv("NEO4J_USERNAME"), os.getenv("NEO4J_PASSWORD")),
 )
 neo4j_driver.verify_connectivity()
 
@@ -21,12 +25,10 @@ llm = OpenAILLM(
     model_params={
         "temperature": 0,
         "response_format": {"type": "json_object"},
-    }
+    },
 )
 
-embedder = OpenAIEmbeddings(
-    model="text-embedding-ada-002"
-)
+embedder = OpenAIEmbeddings(model="text-embedding-ada-002")
 
 text_splitter = FixedSizeSplitter(chunk_size=500, chunk_overlap=100)
 
@@ -40,9 +42,9 @@ NODE_TYPES = [
 
 kg_builder = SimpleKGPipeline(
     llm=llm,
-    driver=neo4j_driver, 
-    neo4j_database=os.getenv("NEO4J_DATABASE"), 
-    embedder=embedder, 
+    driver=neo4j_driver,
+    neo4j_database=os.getenv("NEO4J_DATABASE"),
+    embedder=embedder,
     from_pdf=True,
     text_splitter=text_splitter,
     schema={
@@ -58,14 +60,17 @@ NODE_TYPES = [
     "Example",
     "Process",
     "Challenge",
-    {"label": "Benefit", "description": "A benefit or advantage of using a technology or approach."},
+    {
+        "label": "Benefit",
+        "description": "A benefit or advantage of using a technology or approach.",
+    },
     {
         "label": "Resource",
         "description": "A related learning resource such as a book, article, video, or course.",
         "properties": [
-            {"name": "name", "type": "STRING", "required": True}, 
-            {"name": "type", "type": "STRING"}
-        ]
+            {"name": "name", "type": "STRING", "required": True},
+            {"name": "type", "type": "STRING"},
+        ],
     },
 ]
 # end::node_types[]
@@ -78,7 +83,7 @@ RELATIONSHIP_TYPES = [
     "LEADS_TO",
     "HAS_CHALLENGE",
     "LEADS_TO",
-    "CITES"
+    "CITES",
 ]
 # end::relationship_types[]
 
@@ -99,15 +104,15 @@ PATTERNS = [
 # tag::kg_builder[]
 kg_builder = SimpleKGPipeline(
     llm=llm,
-    driver=neo4j_driver, 
-    neo4j_database=os.getenv("NEO4J_DATABASE"), 
-    embedder=embedder, 
+    driver=neo4j_driver,
+    neo4j_database=os.getenv("NEO4J_DATABASE"),
+    embedder=embedder,
     from_pdf=True,
     text_splitter=text_splitter,
     schema={
         "node_types": NODE_TYPES,
         "relationship_types": RELATIONSHIP_TYPES,
-        "patterns": PATTERNS
+        "patterns": PATTERNS,
     },
 )
 # end::kg_builder[]
@@ -118,10 +123,11 @@ print(result.result)
 
 # tag::all_documents[]
 data_path = "./genai-graphrag-python/data/"
-pdf_files = [os.path.join(data_path, f) for f in os.listdir(data_path) if f.endswith('.pdf')]
+pdf_files = [
+    os.path.join(data_path, f) for f in os.listdir(data_path) if f.endswith(".pdf")
+]
 
 for pdf_file in pdf_files:
-
     print(f"Processing {pdf_file}")
     result = asyncio.run(kg_builder.run_async(file_path=pdf_file))
     print(result.result)
