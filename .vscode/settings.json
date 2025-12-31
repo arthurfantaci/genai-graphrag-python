@@ -1,4 +1,9 @@
 {
+  // TOML Schema - use official Ruff schema from SchemaStore
+  "evenBetterToml.schema.associations": {
+    "pyproject.toml": "https://json.schemastore.org/pyproject.json"
+  },
+
   // Python Configuration
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
   "python.terminal.activateEnvironment": true,
