@@ -34,3 +34,9 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+
+# macOS
+.DS_Store
+
+# Cypher query files (may contain secrets)
+*.cypher
